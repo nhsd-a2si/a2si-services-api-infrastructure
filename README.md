@@ -8,3 +8,9 @@ project.
 ```
 $ terraform init --backend-config=environments/prod/s3backend.tfvars environments/prod
 ```
+
+## Applying Terraform
+
+```
+$ terraform apply environments/prod
+```
