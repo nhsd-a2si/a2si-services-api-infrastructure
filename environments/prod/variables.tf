@@ -1,3 +1,6 @@
+/*
+ * REAL NETWORK VARIABLES
+ */
 variable "real_network_name" {
   default = "ProdReal"
 }
@@ -40,4 +43,40 @@ variable "real_public_subnet_cidr_blocks" {
 
 variable "real_vpc_cidr_block" {
   default = "10.1.0.0/16"
+}
+
+
+/*
+ * REAL API SERVICE & CLUSTER VARIABLES
+ */
+variable "real_api_ecs_cluster_name" {
+  default = "ProdRealAPI"
+}
+
+variable "real_api_ecs_instance_type" {
+  default = "t2.small"
+}
+
+variable "real_api_service_name" {
+  default = "ProdRealAPI"
+}
+
+variable "real_api_task_desired_count" {
+  default = 2
+}
+
+variable "real_api_max_autoscaling_group_size" {
+  default = 4
+}
+
+variable "real_api_min_autoscaling_group_size" {
+  default = 2
+}
+
+
+/*
+ * SERVICE-SPECIFIC VARIABLES
+ */
+variable "api_service_health_path" {
+  default = "/health"
 }
