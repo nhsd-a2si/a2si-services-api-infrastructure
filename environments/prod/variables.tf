@@ -49,6 +49,14 @@ variable "real_vpc_cidr_block" {
 /*
  * REAL API SERVICE & CLUSTER VARIABLES
  */
+variable "real_api_dns_name" {
+  default = "api.a2sisap.mcbhenwood.com"
+}
+
+variable "real_api_zone_name" {
+  default = "a2sisap.mcbhenwood.com."
+}
+
 variable "real_api_ecs_cluster_name" {
   default = "ProdRealAPI"
 }

@@ -36,3 +36,11 @@ module "real_api_ecs_cluster" {
   min_autoscaling_group_size = "${var.real_api_min_autoscaling_group_size}"
   vpc_id                     = "${module.real_public_private_network.vpc_id}"
 }
+
+module "real_api_service_dns_alias" {
+  source           = "../../modules/dns_alias"
+  alias_name       = "${module.real_api_service.alb_dns_name}"
+  alias_zone_id    = "${module.real_api_service.alb_zone_id}"
+  record_name      = "${var.real_api_dns_name}"
+  record_zone_name = "${var.real_api_zone_name}"
+}

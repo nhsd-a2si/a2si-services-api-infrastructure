@@ -1,3 +1,3 @@
-output "real_api_alb_dns_name" {
-  value = "${module.real_api_service.alb_dns_name}"
+output "real_api_service_fqdn" {
+  value = "${module.real_api_service_dns_alias.record_fqdn}"
 }
