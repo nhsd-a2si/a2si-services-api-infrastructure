@@ -1,0 +1,20 @@
+[
+  {
+    "name": "api",
+    "image": "mcbhenwood/a2si-services-api:latest",
+    "environment": [
+      {
+        "name" : "DJANGO_HOSTNAME", "value" : "api.a2sisap.mcbhenwood.com"
+      },
+      {
+        "name" : "DJANGO_SECRET_KEY", "value" : "NotReallyASecret"
+      }
+    ],
+    "portMappings": [
+      {
+        "hostPort": 0,
+        "containerPort": 8000
+      }
+    ]
+  }
+]
