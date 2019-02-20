@@ -6,15 +6,19 @@ resource "aws_ecs_task_definition" "task" {
   memory                = 256
 }
 
+data "aws_ecs_task_definition" "task" {
+  task_definition = "${aws_ecs_task_definition.task.family}"
+}
 
 resource "aws_ecs_service" "service" {
   name            = "${var.service_name}"
   iam_role        = "${aws_iam_role.service_scheduler.name}"
   cluster         = "${var.cluster_id}"
-  task_definition = "${aws_ecs_task_definition.task.arn}"
+  task_definition = "${aws_ecs_task_definition.task.family}:${max("${aws_ecs_task_definition.task.revision}", "${data.aws_ecs_task_definition.task.revision}")}"
+
   desired_count   = "${var.task_desired_count}"
 
-  depends_on = [
+  depends_on      = [
     "aws_iam_role_policy_attachment.service_scheduler"
   ]
 
