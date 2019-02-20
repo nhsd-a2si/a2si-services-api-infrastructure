@@ -44,3 +44,10 @@ module "real_api_service_dns_alias" {
   record_name      = "${var.real_api_dns_name}"
   record_zone_name = "${var.real_api_zone_name}"
 }
+
+module "real_api_ecs_deployment_user" {
+  source           = "../../modules/ecs_deployment_user"
+  ecs_cluster_arn  = "${module.real_api_ecs_cluster.cluster_arn}"
+  ecs_cluster_name = "${module.real_api_ecs_cluster.cluster_name}"
+  operator_pgp_key = "${var.operator_pgp_key}"
+}

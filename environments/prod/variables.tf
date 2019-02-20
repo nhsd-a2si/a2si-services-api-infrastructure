@@ -1,4 +1,12 @@
 /*
+ * REQUIRED VARIABLES AT RUNTIME
+ */
+variable "operator_pgp_key" {
+  type        = "string"
+  description = "Either a base-64 encoded PGP public key, or a keybase username in the form keybase:some_person_that_exists. Will be used to encrypt output of IAM user credentials. See https://keybase.io"
+}
+
+/*
  * REAL NETWORK VARIABLES
  */
 variable "real_network_name" {
