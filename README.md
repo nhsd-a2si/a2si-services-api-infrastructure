@@ -13,6 +13,10 @@ See section [Applying Terraform](#applying-terraform) for details of command lin
 
 After applying this Terraform, the following outputs will be generated and displayed in your terminal:
 
+  - _real_api_cluster_ - The name of the cluster into which the Real API Service was deployed
+
+  - _real_api_service_name_ - The internal name of the Real API Service at ECS
+
   - _real_api_service_fqdn_ - This is the DNS 'A' entry for the Real API's Application Load Balancer
      endpoint
   
