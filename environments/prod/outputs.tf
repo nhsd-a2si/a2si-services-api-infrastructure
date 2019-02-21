@@ -17,3 +17,7 @@ output "real_api_deploy_user_access_key_id" {
 output "real_api_service_name" {
   value = "${module.real_api_service.service_name}"
 }
+
+output "real_api_static_fqdn" {
+  value = "${module.real_api_static_dns_alias.record_fqdn}"
+}

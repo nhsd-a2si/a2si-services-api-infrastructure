@@ -19,6 +19,9 @@ After applying this Terraform, the following outputs will be generated and displ
 
   - _real_api_service_fqdn_ - This is the DNS 'A' entry for the Real API's Application Load Balancer
      endpoint
+
+  - _real_api_static_fqdn_ -  This is the DNS 'A' entry for the Real API's Static assets website
+     endpoint
   
   - _real_api_deploy_user_access_key_id_ - The key id for the deployment user: You will need to
     provide this to CI environment so that when building the pipeline it can update the ECS
