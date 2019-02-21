@@ -23,7 +23,7 @@ After applying this Terraform, the following outputs will be generated and displ
   - _real_api_static_fqdn_ -  This is the DNS 'A' entry for the Real API's Static assets website
      endpoint
   
-  - _real_api_deploy_user_access_key_id_ - The key id for the deployment user: You will need to
+  - _deploy_user_access_key_id_ - The key id for the deployment user: You will need to
     provide this to CI environment so that when building the pipeline it can update the ECS
     services with the new service images pushed to Docker Hub.
   
