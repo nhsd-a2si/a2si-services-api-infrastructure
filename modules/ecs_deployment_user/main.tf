@@ -1,3 +1,4 @@
+# TODO Find a way to limit the scope of this policy so as not to include all of ECS
 resource "aws_iam_policy" "ecs_deployment" {
   name        = "${var.ecs_cluster_name}-deploy"
   description = "Allow ECS deployment actions on ${var.ecs_cluster_name} cluster"
