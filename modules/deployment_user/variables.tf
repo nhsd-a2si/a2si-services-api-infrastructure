@@ -2,8 +2,8 @@ variable "ecs_cluster_arn" {
   description = "The ARN of the cluster over which to give the user ECS deployment rights"
 }
 
-variable "ecs_cluster_name" {
-  description = "The name of the cluster over which to give the user ECS deployment rights"
+variable "network_name" {
+  description = "The name of the network in which to give the user ECS deployment rights"
 }
 
 variable "operator_pgp_key" {

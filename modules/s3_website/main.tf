@@ -22,3 +22,27 @@ resource "aws_s3_bucket" "website" {
     max_age_seconds = 3000
   }
 }
+
+resource "aws_s3_bucket_policy" "website" {
+  bucket = "${aws_s3_bucket.website.id}"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "${var.upload_user_arn}"
+      },
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": [
+        "${aws_s3_bucket.website.arn}",
+        "${aws_s3_bucket.website.arn}/*"
+      ]
+    }
+  ]
+}
+EOF
+}

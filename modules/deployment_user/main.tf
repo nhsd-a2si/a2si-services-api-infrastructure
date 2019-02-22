@@ -1,7 +1,7 @@
 # TODO Find a way to limit the scope of this policy so as not to include all of ECS
-resource "aws_iam_policy" "ecs_deployment" {
-  name        = "${var.ecs_cluster_name}-deploy"
-  description = "Allow ECS deployment actions on ${var.ecs_cluster_name} cluster"
+resource "aws_iam_policy" "deployment" {
+  name        = "${var.network_name}-deployment"
+  description = "Allow deployment actions on ${var.network_name}"
   policy      = <<EOF
 {
   "Version": "2012-10-17",
@@ -27,16 +27,16 @@ resource "aws_iam_policy" "ecs_deployment" {
 EOF
 }
 
-resource "aws_iam_user" "ecs_deployment" {
-  name = "${var.ecs_cluster_name}-deploy"
+resource "aws_iam_user" "deployment" {
+  name = "${var.network_name}-deployment"
 }
 
-resource "aws_iam_access_key" "ecs_deployment" {
-  user    = "${aws_iam_user.ecs_deployment.name}"
+resource "aws_iam_access_key" "deployment" {
+  user    = "${aws_iam_user.deployment.name}"
   pgp_key = "${var.operator_pgp_key}"
 }
 
-resource "aws_iam_user_policy_attachment" "ecs_deployment" {
-  user       = "${aws_iam_user.ecs_deployment.name}"
-  policy_arn = "${aws_iam_policy.ecs_deployment.arn}"
+resource "aws_iam_user_policy_attachment" "deployment" {
+  user       = "${aws_iam_user.deployment.name}"
+  policy_arn = "${aws_iam_policy.deployment.arn}"
 }
