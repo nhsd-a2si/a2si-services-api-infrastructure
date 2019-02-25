@@ -8,6 +8,9 @@
       },
       {
         "name" : "DJANGO_SECRET_KEY", "value" : "NotReallyASecret"
+      },
+      {
+        "name" : "DJANGO_STATIC_URL", "value" : "http://static.a2sisap.mcbhenwood.com/"
       }
     ],
     "portMappings": [
