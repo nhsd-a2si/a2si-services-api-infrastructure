@@ -14,7 +14,7 @@ variable "real_network_name" {
 }
 
 variable "real_nat_instance_type" {
-  default = "t2.small"
+  default = "t2.micro"
 }
 
 variable "real_private_subnet_azs" {
@@ -70,7 +70,7 @@ variable "real_api_ecs_cluster_name" {
 }
 
 variable "real_api_ecs_instance_type" {
-  default = "t2.small"
+  default = "t2.micro"
 }
 
 variable "real_api_service_name" {
