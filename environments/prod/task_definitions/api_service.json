@@ -7,6 +7,9 @@
         "name" : "DJANGO_HOSTNAME", "value" : "api.a2sisap.mcbhenwood.com"
       },
       {
+        "name" : "DJANGO_PAGE_TITLE", "value" : "A2SI Services API (prototype)"
+      },
+      {
         "name" : "DJANGO_SECRET_KEY", "value" : "NotReallyASecret"
       },
       {
