@@ -42,12 +42,29 @@ module "real_api_service_dns_alias" {
   alias_name       = "${module.real_api_service.alb_dns_name}"
   alias_zone_id    = "${module.real_api_service.alb_zone_id}"
   record_name      = "${var.real_api_dns_name}"
-  record_zone_name = "${var.real_api_zone_name}"
+  record_zone_name = "${var.real_zone_name}"
 }
 
-module "real_api_ecs_deployment_user" {
-  source           = "../../modules/ecs_deployment_user"
+module "real_api_static_website" {
+  source              = "../../modules/s3_website"
+  allowed_origin_urls = [
+    "${lower(module.real_api_service.listener_protocol)}://${module.real_api_service_dns_alias.record_fqdn}"
+  ]
+  upload_user_arn     = "${module.real_deployment_user.deploy_user_arn}"
+  website_name        = "${var.real_api_static_dns_name}"
+}
+
+module "real_api_static_dns_alias" {
+  source           = "../../modules/dns_alias"
+  alias_name       = "${module.real_api_static_website.website_domain}"
+  alias_zone_id    = "${module.real_api_static_website.hosted_zone_id}"
+  record_name      = "${var.real_api_static_dns_name}"
+  record_zone_name = "${var.real_zone_name}"
+}
+
+module "real_deployment_user" {
+  source           = "../../modules/deployment_user"
   ecs_cluster_arn  = "${module.real_api_ecs_cluster.cluster_arn}"
-  ecs_cluster_name = "${module.real_api_ecs_cluster.cluster_name}"
+  network_name     = "${var.real_network_name}"
   operator_pgp_key = "${var.operator_pgp_key}"
 }

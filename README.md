@@ -19,8 +19,11 @@ After applying this Terraform, the following outputs will be generated and displ
 
   - _real_api_service_fqdn_ - This is the DNS 'A' entry for the Real API's Application Load Balancer
      endpoint
+
+  - _real_api_static_fqdn_ -  This is the DNS 'A' entry for the Real API's Static assets website
+     endpoint
   
-  - _real_api_deploy_user_access_key_id_ - The key id for the deployment user: You will need to
+  - _deploy_user_access_key_id_ - The key id for the deployment user: You will need to
     provide this to CI environment so that when building the pipeline it can update the ECS
     services with the new service images pushed to Docker Hub.
   
@@ -37,14 +40,14 @@ To convert it into the actual secret access key, you therefore need to:
  
   1. Base 64 decode the _deploy_user_secret_access_key_encrypted_ output
 
-  2. Run that output through a PGP decoded with the same key you supplied at `apply` time
+  2. Run that output through a PGP decoder with the same key you supplied at `apply` time
    
 If you installed Keybase as suggested above, then you:
 
   1. Copy the long output of _deploy_user_secret_access_key_encrypted_ to your clipboard
    
   2. Type the following, pausing to paste the above copy in this command line, in place of
-     "THECOPIEDOUTPUT":
+     THECOPIEDOUTPUT:
 
    `echo -n "THECOPIEDOUTPUT" | base64 --decode - | keybase pgp decrypt` 
 

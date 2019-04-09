@@ -7,14 +7,14 @@ variable "operator_pgp_key" {
 }
 
 /*
- * REAL NETWORK VARIABLES
+ * REAL GENERAL VARIABLES
  */
 variable "real_network_name" {
   default = "ProdReal"
 }
 
 variable "real_nat_instance_type" {
-  default = "t2.small"
+  default = "t2.micro"
 }
 
 variable "real_private_subnet_azs" {
@@ -53,6 +53,9 @@ variable "real_vpc_cidr_block" {
   default = "10.1.0.0/16"
 }
 
+variable "real_zone_name" {
+  default = "a2sisap.mcbhenwood.com."
+}
 
 /*
  * REAL API SERVICE & CLUSTER VARIABLES
@@ -61,16 +64,13 @@ variable "real_api_dns_name" {
   default = "api.a2sisap.mcbhenwood.com"
 }
 
-variable "real_api_zone_name" {
-  default = "a2sisap.mcbhenwood.com."
-}
 
 variable "real_api_ecs_cluster_name" {
   default = "ProdRealAPI"
 }
 
 variable "real_api_ecs_instance_type" {
-  default = "t2.small"
+  default = "t2.micro"
 }
 
 variable "real_api_service_name" {
@@ -89,6 +89,9 @@ variable "real_api_min_autoscaling_group_size" {
   default = 2
 }
 
+variable "real_api_static_dns_name" {
+  default = "static.a2sisap.mcbhenwood.com"
+}
 
 /*
  * SERVICE-SPECIFIC VARIABLES
