@@ -4,6 +4,9 @@ resource "aws_ecs_cluster" "cluster" {
 
 data "aws_ami" "ecs_instance" {
   most_recent = true
+  owners = [
+    "amazon"
+  ]
 
   filter {
     name   = "owner-alias"
