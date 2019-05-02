@@ -39,3 +39,6 @@ variable "username" {
   description = "Name to assign to db access account"
 }
 
+variable "vpc_id" {
+  description = "ID of VPC in which to create the db security groups"
+}

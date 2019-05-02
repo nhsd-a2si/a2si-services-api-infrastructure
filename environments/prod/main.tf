@@ -36,19 +36,23 @@ module "real_api_default_db" {
   storage_type         = "${var.real_api_default_db_storage_type}"
   subnet_ids           = "${module.real_public_private_network.private_subnet_ids}"
   username             = "${var.real_api_default_db_user}"
+  vpc_id               = "${module.real_public_private_network.vpc_id}"
 }
 
 module "real_api_ecs_cluster" {
-  source                     = "../../modules/ecs_cluster"
-  alb_security_group_id      = "${module.real_api_service.alb_security_group_id}"
-  alb_subnet_cidrs           = "${module.real_public_private_network.public_subnet_cidrs}"
-  cluster_subnet_cidrs       = "${module.real_public_private_network.private_subnet_cidrs}"
-  cluster_subnet_ids         = "${module.real_public_private_network.private_subnet_ids}"
-  cluster_name               = "${var.real_api_ecs_cluster_name}"
-  instance_type              = "${var.real_api_ecs_instance_type}"
-  max_autoscaling_group_size = "${var.real_api_max_autoscaling_group_size}"
-  min_autoscaling_group_size = "${var.real_api_min_autoscaling_group_size}"
-  vpc_id                     = "${module.real_public_private_network.vpc_id}"
+  source                              = "../../modules/ecs_cluster"
+  alb_security_group_id               = "${module.real_api_service.alb_security_group_id}"
+  alb_subnet_cidrs                    = "${module.real_public_private_network.public_subnet_cidrs}"
+  cluster_subnet_cidrs                = "${module.real_public_private_network.private_subnet_cidrs}"
+  cluster_subnet_ids                  = "${module.real_public_private_network.private_subnet_ids}"
+  cluster_name                        = "${var.real_api_ecs_cluster_name}"
+  default_db_client_security_group_id = "${module.real_api_default_db.db_client_security_group_id}"
+  default_db_port                     = "${module.real_api_default_db.port}"
+  default_db_security_group_id        = "${module.real_api_default_db.db_security_group_id}"
+  instance_type                       = "${var.real_api_ecs_instance_type}"
+  max_autoscaling_group_size          = "${var.real_api_max_autoscaling_group_size}"
+  min_autoscaling_group_size          = "${var.real_api_min_autoscaling_group_size}"
+  vpc_id                              = "${module.real_public_private_network.vpc_id}"
 }
 
 module "real_api_service_dns_alias" {
