@@ -6,6 +6,11 @@ variable "operator_pgp_key" {
   description = "Either a base-64 encoded PGP public key, or a keybase username in the form keybase:some_person_that_exists. Will be used to encrypt output of IAM user credentials. See https://keybase.io"
 }
 
+variable "real_api_default_db_password_parameter" {
+  type = "string"
+  description = "Name of an SSM parameter in which there is an encrypted (SecureString) password for the default db for the Real API"
+}
+
 /*
  * REAL GENERAL VARIABLES
  */
@@ -60,10 +65,41 @@ variable "real_zone_name" {
 /*
  * REAL API SERVICE & CLUSTER VARIABLES
  */
+variable "real_api_default_db_allocated_storage_gb" {
+  default = 20
+}
+
+variable "real_api_default_db_engine" {
+  default = "postgres"
+}
+
+variable "real_api_default_db_engine_version" {
+  default = "11.1"
+}
+
+variable "real_api_default_db_instance_class" {
+  default = "db.t2.micro"
+}
+
+variable "real_api_default_db_name" {
+  default = "defaultdb"
+}
+
+variable "real_api_default_db_port" {
+  default = 5432
+}
+
+variable "real_api_default_db_storage_type" {
+  default = "gp2"
+}
+
+variable "real_api_default_db_user" {
+  default = "defaultdb"
+}
+
 variable "real_api_dns_name" {
   default = "api.a2sisap.mcbhenwood.com"
 }
-
 
 variable "real_api_ecs_cluster_name" {
   default = "ProdRealAPI"

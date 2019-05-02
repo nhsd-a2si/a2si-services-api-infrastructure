@@ -24,6 +24,20 @@ module "real_api_service" {
   vpc_id                 = "${module.real_public_private_network.vpc_id}"
 }
 
+module "real_api_default_db" {
+  source               = "../../modules/rds_database"
+  allocated_storage_gb = "${var.real_api_default_db_allocated_storage_gb}"
+  engine               = "${var.real_api_default_db_engine}"
+  engine_version       = "${var.real_api_default_db_engine_version}"
+  instance_class       = "${var.real_api_default_db_instance_class}"
+  name                 = "${var.real_api_default_db_name}"
+  password_parameter   = "${var.real_api_default_db_password_parameter}"
+  port                 = "${var.real_api_default_db_port}"
+  storage_type         = "${var.real_api_default_db_storage_type}"
+  subnet_ids           = "${module.real_public_private_network.private_subnet_ids}"
+  username             = "${var.real_api_default_db_user}"
+}
+
 module "real_api_ecs_cluster" {
   source                     = "../../modules/ecs_cluster"
   alb_security_group_id      = "${module.real_api_service.alb_security_group_id}"

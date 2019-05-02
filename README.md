@@ -63,9 +63,23 @@ $ terraform init --backend-config=environments/prod/s3backend.tfvars environment
 ## Applying Terraform
 
 ```
-$ terraform apply -var "operator_pgp_key=SOME_PGP_KEY" environments/prod
+$ terraform apply \
+  -var "operator_pgp_key=SOME_PGP_KEY" \
+  -var "real_api_default_db_password_parameter=SOME_SSM_PARAMETER_NAME" \
+  environments/prod
 ```
 
 `operator_pgp_key` is either a base-64 encoded PGP public key, or a keybase username in the form
 keybase:some_person_that_exists. Will be used to encrypt output of IAM user credentials.
 See https://keybase.io
+
+`real_api_default_db_password_parameter` is the ARN of an AWS Systems Manager parameter. This
+parameter must already be set to a suitably secure password value before the Terraform is applied.
+Its value must be a string which is the password to use for connecting to the "default db" for the
+Real API - This is the db which Django uses to manage sessions, state, user accounts and API access
+tokens. Applying the Terraform will have the effect of a) setting this password as the access
+password for the relevant RDS instance and b) becoming the password which is passed securely to any
+new ECS containers in the Real API service, so that they may access the db. If you change the value
+of this secret you will need to re-apply the Terraform so that new ECS containers will be made
+aware of the new credential. If you change the value _without_ then re-applying the Terraform, you
+will cut off any new ECS containers from being able to access their db.
