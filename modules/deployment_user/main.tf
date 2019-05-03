@@ -16,7 +16,8 @@ resource "aws_iam_policy" "deployment" {
         "ecs:ListServices",
         "ecs:ListTasks",
         "ecs:RegisterTaskDefinition",
-        "ecs:UpdateService"
+        "ecs:UpdateService",
+        "iam:PassRole"
       ],
       "Resource": [
         "*"
