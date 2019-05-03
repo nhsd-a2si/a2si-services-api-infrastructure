@@ -1,3 +1,7 @@
+module "aws_account" {
+  source = "../../modules/aws_account"
+}
+
 module "real_public_private_network" {
   source                     = "../../modules/public_private_network"
   nat_instance_type          = "${var.real_nat_instance_type}"
@@ -10,18 +14,25 @@ module "real_public_private_network" {
 }
 
 module "real_api_service" {
-  source                 = "../../modules/ecs_balanced_service"
-  alb_subnet_ids         = "${module.real_public_private_network.public_subnet_ids}"
-  cluster_id             = "${module.real_api_ecs_cluster.cluster_id}"
-  instance_subnet_cidrs  = "${module.real_public_private_network.private_subnet_cidrs}"
-  service_container_name = "api"
-  service_container_port = 8000
-  container_definitions  = "${file("${path.module}/task_definitions/api_service.json")}"
-  service_health_path    = "${var.api_service_health_path}"
-  service_name           = "${var.real_api_service_name}"
-  task_desired_count     = "${var.real_api_task_desired_count}"
-  task_family            = "${var.real_api_service_name}"
-  vpc_id                 = "${module.real_public_private_network.vpc_id}"
+  source                        = "../../modules/ecs_balanced_service"
+  alb_subnet_ids                = "${module.real_public_private_network.public_subnet_ids}"
+  account_id                    = "${module.aws_account.account_id}"
+  cluster_id                    = "${module.real_api_ecs_cluster.cluster_id}"
+  default_db_host               = "${module.real_api_default_db.address}"
+  default_db_port               = "${module.real_api_default_db.port}"
+  default_db_name               = "${var.real_api_default_db_name}"
+  default_db_user               = "${var.real_api_default_db_user}"
+  default_db_password_parameter = "${var.real_api_default_db_password_parameter}"
+  instance_subnet_cidrs         = "${var.real_private_subnet_cidr_blocks}"
+  region                        = "${var.region}"
+  service_container_name        = "api"
+  service_container_port        = 8000
+  container_definition_template = "${file("${path.module}/task_definitions/api_service.json")}"
+  service_health_path           = "${var.api_service_health_path}"
+  service_name                  = "${var.real_api_service_name}"
+  task_desired_count            = "${var.real_api_task_desired_count}"
+  task_family                   = "${var.real_api_service_name}"
+  vpc_id                        = "${module.real_public_private_network.vpc_id}"
 }
 
 module "real_api_default_db" {

@@ -1,3 +1,7 @@
+variable "account_id" {
+  description = "ID of the AWS account in which this is being applied"
+}
+
 variable "alb_subnet_ids" {
   type        = "list"
   description = "IDs of the subnets in which to bring up the ALB"
@@ -7,13 +11,37 @@ variable "cluster_id" {
   description = "ID of cluster which will host this service"
 }
 
-variable "container_definitions" {
-  description = "JSON containing the definition of the containers for this service"
+variable "container_definition_template" {
+  description = "TF template file to render to JSON which defines the containers for this service"
+}
+
+variable "default_db_host" {
+  description = "Hostname to which the containers connect for their default db"
+}
+
+variable "default_db_port" {
+  description = "Port to which the containers connect for their default db"
+}
+
+variable "default_db_name" {
+  description = "Name of the default db to which the containers connect"
+}
+
+variable "default_db_password_parameter" {
+  description = "Name of an SSM parameter in which there is an encrypted (SecureString) password with which the containers connect to their default db"
+}
+
+variable "default_db_user" {
+  description = "Name of the user with which the containers connect to the default db"
 }
 
 variable "instance_subnet_cidrs" {
   type = "list"
   description = "List of CIDRs of the subnets into which the ECS instances will be launched"
+}
+
+variable "region" {
+  description = "Region into which services are deployed"
 }
 
 variable "service_container_name" {

@@ -62,6 +62,10 @@ variable "real_zone_name" {
   default = "a2sisap.mcbhenwood.com."
 }
 
+variable "region" {
+  default = "eu-west-2"
+}
+
 /*
  * REAL API SERVICE & CLUSTER VARIABLES
  */

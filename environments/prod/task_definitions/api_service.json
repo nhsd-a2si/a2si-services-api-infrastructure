@@ -4,6 +4,18 @@
     "image": "mcbhenwood/a2si-services-api:latest",
     "environment": [
       {
+        "name" : "DJANGO_DB_HOST", "value" : "${default_db_host}"
+      },
+      {
+        "name" : "DJANGO_DB_PORT", "value" : "${default_db_port}"
+      },
+      {
+        "name" : "DJANGO_DB_NAME", "value" : "${default_db_name}"
+      },
+      {
+        "name" : "DJANGO_DB_USER", "value" : "${default_db_user}"
+      },
+      {
         "name" : "DJANGO_HOSTNAME", "value" : "api.a2sisap.mcbhenwood.com"
       },
       {
@@ -14,6 +26,12 @@
       },
       {
         "name" : "DJANGO_STATIC_URL", "value" : "http://static.a2sisap.mcbhenwood.com/"
+      }
+    ],
+    "secrets": [
+      {
+        "name": "DJANGO_DB_PASSWORD",
+        "valueFrom": "arn:aws:ssm:${region}:${account_id}:parameter${default_db_password_parameter}"
       }
     ],
     "portMappings": [
