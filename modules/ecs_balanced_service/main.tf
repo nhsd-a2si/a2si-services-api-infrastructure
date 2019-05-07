@@ -2,7 +2,9 @@ data "template_file" "task" {
   template = "${var.container_definition_template}"
 
   vars {
-    account_id                    = "${var.account_id}",
+    account_id                    = "${var.account_id}"
+    logs_group                    = "${var.logs_group}"
+    logs_stream_prefix            = "${var.logs_stream_prefix}"
     default_db_host               = "${var.default_db_host}"
     default_db_port               = "${var.default_db_port}"
     default_db_name               = "${var.default_db_name}"

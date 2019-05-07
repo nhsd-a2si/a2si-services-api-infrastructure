@@ -117,6 +117,14 @@ variable "real_api_service_name" {
   default = "ProdRealAPI"
 }
 
+variable "real_api_log_group_name" {
+  default = "ProdReal"
+}
+
+variable "real_api_logs_stream_prefix" {
+  default = "api"
+}
+
 variable "real_api_task_desired_count" {
   default = 2
 }

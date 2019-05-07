@@ -78,3 +78,8 @@ resource "aws_iam_role_policy_attachment" "task" {
   role       = "${aws_iam_role.task.name}"
   policy_arn = "${aws_iam_policy.task.arn}"
 }
+
+resource "aws_iam_role_policy_attachment" "log" {
+  role       = "${aws_iam_role.task.name}"
+  policy_arn = "${var.allow_log_policy_arn}"
+}

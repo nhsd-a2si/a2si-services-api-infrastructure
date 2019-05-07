@@ -7,6 +7,10 @@ variable "alb_subnet_ids" {
   description = "IDs of the subnets in which to bring up the ALB"
 }
 
+variable "allow_log_policy_arn" {
+  description = "ARN of the policy which allows streaming to the Cloudwatch logs"
+}
+
 variable "cluster_id" {
   description = "ID of cluster which will host this service"
 }
@@ -38,6 +42,14 @@ variable "default_db_user" {
 variable "instance_subnet_cidrs" {
   type = "list"
   description = "List of CIDRs of the subnets into which the ECS instances will be launched"
+}
+
+variable "logs_group" {
+  description = "Name of logs group to which container log events should be written"
+}
+
+variable "logs_stream_prefix" {
+  description = "Prefix for the log streams"
 }
 
 variable "region" {

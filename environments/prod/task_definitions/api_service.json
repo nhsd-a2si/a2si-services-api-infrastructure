@@ -34,6 +34,14 @@
         "valueFrom": "arn:aws:ssm:${region}:${account_id}:parameter${default_db_password_parameter}"
       }
     ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${logs_group}",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "${logs_stream_prefix}"
+      }
+    },
     "portMappings": [
       {
         "hostPort": 0,

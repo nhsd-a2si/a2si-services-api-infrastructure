@@ -13,9 +13,15 @@ module "real_public_private_network" {
   vpc_cidr_block             = "${var.real_vpc_cidr_block}"
 }
 
+module "real_api_logs" {
+  source            = "../../modules/cloudwatch_log_stream"
+  log_group_name    = "${var.real_api_log_group_name}"
+}
+
 module "real_api_service" {
   source                        = "../../modules/ecs_balanced_service"
   alb_subnet_ids                = "${module.real_public_private_network.public_subnet_ids}"
+  allow_log_policy_arn          = "${module.real_api_logs.allow_log_policy_arn}"
   account_id                    = "${module.aws_account.account_id}"
   cluster_id                    = "${module.real_api_ecs_cluster.cluster_id}"
   default_db_host               = "${module.real_api_default_db.address}"
@@ -24,6 +30,8 @@ module "real_api_service" {
   default_db_user               = "${var.real_api_default_db_user}"
   default_db_password_parameter = "${var.real_api_default_db_password_parameter}"
   instance_subnet_cidrs         = "${var.real_private_subnet_cidr_blocks}"
+  logs_group                    = "${module.real_api_logs.log_group_name}"
+  logs_stream_prefix            = "${var.real_api_logs_stream_prefix}"
   region                        = "${var.region}"
   service_container_name        = "api"
   service_container_port        = 8000
