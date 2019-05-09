@@ -21,6 +21,18 @@ variable "cluster_subnet_ids" {
   description = "Subnets into which to launch the cluster instances"
 }
 
+variable "default_db_client_security_group_id" {
+  description = "ID for the security group into which DB clients need to be added"
+}
+
+variable "default_db_port" {
+  description = "Port for which to allow outgoing DB connections"
+}
+
+variable "default_db_security_group_id" {
+  description = "ID for the security group of the DB instance"
+}
+
 variable "instance_type" {
   description = "Instance type to use for the ECS instances"
 }

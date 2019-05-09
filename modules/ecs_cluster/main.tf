@@ -4,6 +4,9 @@ resource "aws_ecs_cluster" "cluster" {
 
 data "aws_ami" "ecs_instance" {
   most_recent = true
+  owners = [
+    "amazon"
+  ]
 
   filter {
     name   = "owner-alias"
@@ -52,6 +55,15 @@ resource "aws_security_group_rule" "allow_outgoing_https" {
   security_group_id = "${aws_security_group.ecs_instances.id}"
 }
 
+resource "aws_security_group_rule" "allow_outgoing_default_db" {
+  type                     = "egress"
+  from_port                = "${var.default_db_port}"
+  to_port                  = "${var.default_db_port}"
+  protocol                 = "tcp"
+  source_security_group_id = "${var.default_db_security_group_id}"
+
+  security_group_id        = "${aws_security_group.ecs_instances.id}"
+}
 
 resource "aws_launch_configuration" "ecs_instance" {
   name_prefix          = "${var.cluster_name}-"
@@ -70,7 +82,8 @@ resource "aws_launch_configuration" "ecs_instance" {
   }
 
   security_groups      = [
-    "${aws_security_group.ecs_instances.id}"
+    "${aws_security_group.ecs_instances.id}",
+    "${var.default_db_client_security_group_id}"
   ]
   user_data            = <<EOF
 #!/bin/bash
